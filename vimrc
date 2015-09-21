@@ -1,6 +1,9 @@
 "Use pathogen
 execute pathogen#infect()
 
+" Enable backspace to function as expected
+set backspace=indent,eol,start
+
 syntax on
 set number
 filetype indent plugin on
