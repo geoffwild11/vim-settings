@@ -22,7 +22,7 @@ syn keyword myTodo contained TODO: FIXME:
 " Compile and run Python
 if has("win32")
   "Windows options here
-	autocmd FileType python nnoremap <buffer> <F9> :exec '!py' shellescape(@%, 1)<cr>
+	autocmd FileType python nnoremap <buffer> <F9> :exec '!py3' shellescape(@%, 1)<cr>
 else
   if has("unix")
     let s:uname = system("uname")
