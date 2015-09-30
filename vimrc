@@ -4,10 +4,16 @@ execute pathogen#infect()
 " Enable backspace to function as expected
 set backspace=indent,eol,start
 
+"Basic settings for Vim
 syntax on
 set number
 filetype indent plugin on
 set modeline
+set hlsearch
+set tabstop=4
+"set expandtab
+set shiftwidth=4
+set softtabstop=4
 
 " Set colors to 256
 set t_Co=256

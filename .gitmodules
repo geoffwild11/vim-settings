@@ -25,3 +25,6 @@
 [submodule "bundle/syntastic"]
 	path = bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule "bundle/vim-multimarkdown"]
+	path = bundle/vim-multimarkdown
+	url = https://github.com/jngeist/vim-multimarkdown.git
