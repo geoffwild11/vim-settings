@@ -15,6 +15,9 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
+"Font
+set guifont=Consolas:h10:cANSI
+
 " Set colors to 256
 set t_Co=256
 
