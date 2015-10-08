@@ -4,6 +4,8 @@ execute pathogen#infect()
 " Enable backspace to function as expected
 set backspace=indent,eol,start
 
+"Map <ESC> to the key sequence jj
+imap jj <Esc> 
 "Basic settings for Vim
 syntax on
 set number
