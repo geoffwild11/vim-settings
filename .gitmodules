@@ -31,6 +31,9 @@
 [submodule "bundle/hardmode"]
 	path = bundle/hardmode
 	url = https://github.com/wikitopian/hardmode.git
-[submodule "vim-notes"]
-	path = vim-notes
+[submodule "bundle/vim-notes"]
+	path = bundle/vim-notes
 	url = https://github.com/xolox/vim-notes.git
+[submodule "bundle/vim-misc"]
+	path = bundle/vim-misc
+	url = https://github.com/xolox/vim-misc.git
