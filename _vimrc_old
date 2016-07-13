@@ -1,37 +1,22 @@
-" Modified by: Geoff Wild
-" Last Edit: 7/12/2016
-"
-" An example for a vimrc file.
-"
-" Maintainer:	Bram Moolenaar <Bram@vim.org>
-" Last change:	2011 Apr 15
-"
-" To use it, copy it to
-"     for Unix and OS/2:  ~/.vimrc
-"	      for Amiga:  s:.vimrc
-"  for MS-DOS and Win32:  $VIM\_vimrc
-"	    for OpenVMS:  sys$login:.vimrc
-
-"Use pathogen
-execute pathogen#infect()
-
-" When started as "evim", evim.vim will already have done these settings.
-if v:progname =~? "evim"
-  finish
-endif
-
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" allow backspacing over everything in insert mode
+"Use pathogen
+execute pathogen#infect()
+
+" Enable backspace to function as expected
 set backspace=indent,eol,start
 
 "Map <ESC> to the key sequence jj
 imap jj <Esc>
 
 " Map Ctrl+C to "*y in Windows
-vnoremap <C-c> "*y
+vnoremap <C-c> "*yy
+
+" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
+" so that you can undo CTRL-U after inserting a line break.
+inoremap <C-U> <C-G>u<C-U>
 
 if has("vms")
   set nobackup		" do not keep a backup file, use versions instead
@@ -42,31 +27,63 @@ set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
-set number 		" Show line numbers
 
-"Font
-set guifont=Consolas:h10:cANSI
-
-" For Win32 GUI: remove 't' flag from 'guioptions': no tearoff menu entries
-" let &guioptions = substitute(&guioptions, "t", "", "g")
-
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
-" CTRL-U in insert mode deletes a lot.  Use CTRL-G u to first break undo,
-" so that you can undo CTRL-U after inserting a line break.
-inoremap <C-U> <C-G>u<C-U>
-
-" In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
+"Basic settings for Vim (THIS IS OLD STUFF)
+"syntax on
+"set number
+"filetype indent plugin on
+"set modeline
+"set hlsearch
+"set tabstop=4
+"set expandtab
+"set shiftwidth=4
+"set softtabstop=4
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
   syntax on
   set hlsearch
+endif
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+"Font
+set guifont=Consolas:h10:cANSI
+
+" Set colors to 256
+set t_Co=256
+
+" Change Colorscheme
+" colorscheme sourcerer
+colorscheme up
+
+" Special Highlighting
+syn keyword myTodo contained TODO: FIXME:
+au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md  setf markdown
+autocmd BufNewFile,BufRead *.ertf set syntax=xml
+
+" Compile and run Python
+if has("win32")
+  "Windows options here
+	autocmd FileType python nnoremap <buffer> <F9> :exec '!py3' shellescape(@%, 1)<cr>
+	let g:syntastic_python_python_exec = 'C:\Python34\python.exe'
+	noremap <C-j> :%!py -m json.tool<cr>
+
+else
+  if has("unix")
+    let s:uname = system("uname")
+    if s:uname == "Darwin\n"
+      "Mac options here
+	autocmd FileType python nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<cr>
+	" Syntastic Python 3 location
+	let g:syntastic_python_python_exec = '/Library/Frameworks/Python.framework/Versions/3.4/bin/python3'
+	noremap <C-j> :%!python -m json.tool<cr>
+    endif
+  endif
 endif
 
 " Only do this part when compiled with support for autocommands.
@@ -110,22 +127,6 @@ if !exists(":DiffOrig")
   command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
 		  \ | wincmd p | diffthis
 endif
-
-" Personal Settings
-"Font
-set guifont=Consolas:h10:cANSI
-
-" Set colors to 256
-set t_Co=256
-
-" Change Colorscheme
-" colorscheme sourcerer
-colorscheme up
-
-" Special Highlighting
-syn keyword myTodo contained TODO: FIXME:
-au BufNewFile,BufRead *.markdown,*.mdown,*.mkd,*.mkdn,*.mdwn,*.md  setf markdown
-autocmd BufNewFile,BufRead *.ertf set syntax=xml
 
 " Syntastic Settings
 set statusline+=%#warningmsg#
