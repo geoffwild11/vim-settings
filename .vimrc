@@ -1,6 +1,3 @@
-"Use pathogen
-execute pathogen#infect()
-
 " Enable backspace to function as expected
 set backspace=indent,eol,start
 
@@ -23,10 +20,6 @@ set guifont=Consolas:h10:cANSI
 
 " Set colors to 256
 set t_Co=256
-
-" Change Colorscheme
-" colorscheme sourcerer
-colorscheme up
 
 " Special Highlighting
 syn keyword myTodo contained TODO: FIXME:
@@ -62,4 +55,4 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_python_use_codec = 1
 
-
+noremap <silent> <C-k><C-B> :NERDTreeToggle<CR>
